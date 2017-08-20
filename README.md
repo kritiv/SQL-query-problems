@@ -30,7 +30,9 @@ select T1.maker from
 (Select maker, max(speed) As speed from Product p inner join PC on p.model=pc.model group by speed, maker) T3 
 where T1.maker=T2.maker AND T2.maker=T3.maker 
 group by T1.maker
--------------
+
+#Q-25 :Find the printer makers also producing PCs with the lowest RAM capacity and the highest processor speed of all PCs having the lowest RAM capacity. 
+
 SELECT distinct maker FROM product WHERE type = 'printer'
 AND maker IN (SELECT maker
 FROM product JOIN ( 
