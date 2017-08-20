@@ -43,3 +43,15 @@ SELECT model, speed, ram FROM pc WHERE speed =
   AND ram = (SELECT MIN(ram) FROM pc)
             ) b
 ON product.model = b.model)
+
+#Q-26 : Find out the average price of PCs and laptops produced by maker A.
+Result set: one overall average price for all items.
+
+Select avg(price) from
+(
+select price from PC Join Product p on p.model=pc.model where maker='A'
+Union All
+Select Price from laptop L Join Product p on p.model=L.model where maker='A'
+) p
+
+
