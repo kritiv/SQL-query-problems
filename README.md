@@ -9,7 +9,7 @@ PC(code, model, speed, ram, hd, cd, price)
 Laptop(code, model, speed, ram, hd, screen, price)
 Printer(code, model, color, type, price)
 
-#Q-1 : List the models of any type having the highest price of all products present in the database.
+#Q-24 : List the models of any type having the highest price of all products present in the database.
 Note: Usage of Common Table Expression(CTE)
 
 with Any_Expensive_Model 
@@ -22,4 +22,13 @@ Select Model, price from Printer
 )
 select model from Any_Expensive_Model where price=(Select max(price) from Any_Expensive_Model)
 
-#Q-2
+#Q-25 :Find the printer makers also producing PCs with the lowest RAM capacity and the highest processor speed of all PCs having the lowest RAM capacity. 
+
+select T1.maker from 
+(Select maker, min(Ram) As ram from Product p inner join PC on p.model=pc.model group by ram, maker) T1, 
+(Select maker from Product p inner join printer pr on p.model=pr.model) T2, 
+(Select maker, max(speed) As speed from Product p inner join PC on p.model=pc.model group by speed, maker) T3 
+where T1.maker=T2.maker AND T2.maker=T3.maker 
+group by T1.maker
+-------------
+
