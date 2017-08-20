@@ -31,4 +31,13 @@ select T1.maker from
 where T1.maker=T2.maker AND T2.maker=T3.maker 
 group by T1.maker
 -------------
-
+SELECT distinct maker FROM product WHERE type = 'printer'
+AND maker IN (SELECT maker
+FROM product JOIN ( 
+SELECT model, speed, ram FROM pc WHERE speed =
+                (SELECT MAX(speed) FROM pc
+                WHERE ram = (SELECT MIN(ram) FROM pc)
+                )
+  AND ram = (SELECT MIN(ram) FROM pc)
+            ) b
+ON product.model = b.model)
