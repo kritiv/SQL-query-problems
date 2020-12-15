@@ -1,5 +1,5 @@
 # SQL-query-problems
-Various query problems solved
+Various query problems that I solved
 
 
 
